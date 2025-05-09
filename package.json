@@ -1,0 +1,30 @@
+{
+  "name": "praycard",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:test": "vite build",
+    "preview": "vite preview",
+    "deploy_prod": "npx run-func arplanetNPMTool.js DeployProd",
+    "deploy_test": "npx run-func arplanetNPMTool.js DeployTest"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "pinia": "^2.2.2",
+    "vue": "^3.4.21",
+    "vue-router": "^4.4.0",
+    "vue3-toastify": "^0.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.40",
+    "sass": "^1.85.0",
+    "tailwindcss": "^3.4.7",
+    "terser": "^5.31.6",
+    "vite": "^5.1.6"
+  }
+}
