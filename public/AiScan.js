@@ -9,10 +9,44 @@ let classifyInterval // 存儲分類間隔計時器的引用
 let labels = []
 let isFrontCam = false
 
-function showPrediction(predictions) {
-  // const labelContainer = document.getElementById('label-container')
-  // labelContainer.innerHTML = '' // 清空現有內容
+const bufferSize = 25
+let predictionBuffer = []
 
+function addPredictionToBuffer(prediction) {
+  if (predictionBuffer.length >= bufferSize) {
+    predictionBuffer.shift() // 移除最舊的
+  }
+  predictionBuffer.push(prediction)
+}
+
+function getDominantPrediction() {
+  if (predictionBuffer.length === 0) return null
+
+  const labelStats = {}
+
+  for (const { label, confidence } of predictionBuffer) {
+    if (!labelStats[label]) {
+      labelStats[label] = { count: 0, totalConfidence: 0 }
+    }
+    labelStats[label].count += 1
+    labelStats[label].totalConfidence += confidence
+  }
+
+  // 找出出現最多次的 label
+  const dominant = Object.entries(labelStats).sort(
+    (a, b) => b[1].count - a[1].count
+  )[0]
+
+  const [label, stats] = dominant
+  const averageConfidence = stats.totalConfidence / stats.count
+
+  return {
+    label,
+    averageConfidence
+  }
+}
+
+function showPrediction(predictions) {
   // 將預測值與索引配對並排序
   const indexedPredictions = Array.from(predictions)
     .map((conf, idx) => ({ confidence: conf, index: idx }))
@@ -25,14 +59,40 @@ function showPrediction(predictions) {
 
   const labelName = labels[index]
 
-  EventManager.invoke({
-    'target': 'camera1',
-    'type': 'onAIClassify',
-    'payload': {
-      'label': labelName,
-      'confidence': percentage
-    }
+  // 加入新的預測
+  addPredictionToBuffer({
+    label: labelName,
+    confidence: parseFloat(percentage)
   })
+
+  // 只有當 buffer 滿 10 個時才進行 invoke
+  if (predictionBuffer.length === bufferSize) {
+    // 每次都使用 buffer 裡最多的 label 進行推斷與回傳
+    const dominantPrediction = getDominantPrediction()
+
+    if (dominantPrediction) {
+      EventManager.invoke({
+        target: 'camera1',
+        type: 'onAIClassify',
+        payload: {
+          label: dominantPrediction.label,
+          confidence: (dominantPrediction.averageConfidence * 100).toFixed(2)
+        }
+      })
+    }
+  }
+
+  // EventManager.invoke({
+  //   'target': 'camera1',
+  //   'type': 'onAIClassify',
+  //   'payload': {
+  //     'label': labelName,
+  //     'confidence': percentage
+  //   }
+  // })
+
+  const labelContainer = document.getElementById('label-container')
+  labelContainer.innerHTML = '' // 清空現有內容
 
   // 創建標籤元素
   const labelItem = document.createElement('div')
@@ -73,10 +133,10 @@ function showPrediction(predictions) {
   percentText.style.fontSize = '12px'
   percentText.style.color = '#1f2937' // 深灰
 
-  // barContainer.appendChild(bar)
-  // barContainer.appendChild(percentText)
-  // labelItem.appendChild(barContainer)
-  // labelContainer.appendChild(labelItem)
+  barContainer.appendChild(bar)
+  barContainer.appendChild(percentText)
+  labelItem.appendChild(barContainer)
+  labelContainer.appendChild(labelItem)
 }
 
 // async function changeCam(video_id) {
@@ -112,6 +172,21 @@ async function TensorFlowInit(config) {
   video = document.getElementById('webcam-video')
 
   try {
+    // 方法 1: 禁用 WEBGL_PACK 以避免著色器連結問題
+    tf.ENV.set('WEBGL_PACK', false)
+    console.log('WEBGL_PACK 已禁用')
+
+    // 方法 2: 檢查 WebGL 2.0 支持
+    const gl = document.createElement('canvas').getContext('webgl2')
+    if (!gl) {
+      console.warn('此設備不支援 WebGL 2.0，可能影響性能')
+      // 方法 3: 如果 WebGL 2.0 不支援，切換到 CPU 後端
+      await tf.setBackend('cpu')
+      console.log('已切換到 CPU 後端')
+    } else {
+      console.log('WebGL 2.0 支援正常')
+    }
+
     labels = await loadLabels(config)
 
     if (labels.length === 0) {
@@ -120,11 +195,6 @@ async function TensorFlowInit(config) {
 
     model = await tf.loadLayersModel(config.model_url)
     isModelReady = true
-
-    // document.getElementById('loading').style.display = 'none'
-    // document.getElementById('cam-btn').onclick = () => {
-    //   changeCam(video_id)
-    // }
 
     await startClassifying()
   } catch (error) {
@@ -148,7 +218,7 @@ function startClassifying() {
     if (video && video.readyState === 4) {
       classifyFrame()
     }
-  }, 500)
+  }, 100)
 }
 
 /**

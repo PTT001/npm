@@ -1,46 +1,28 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
-
-async function loadConfigFromS3() {
-  const params = new URLSearchParams(window.location.search)
-  const project = params.get('project')
-
-  if (!project) {
-    console.error('缺少 project 參數')
-    return null
-  }
-
-  const s3Url = `https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY_JSON/20250411/${project}.json`
-
-  try {
-    const response = await fetch(s3Url)
-    if (!response.ok) {
-      throw new Error(`無法獲取 JSON: ${response.statusText}`)
-    }
-    return await response.json()
-  } catch (error) {
-    console.error('抓取 JSON 失敗:', error)
-    return null
-  }
-}
-
-const init = async () => {
-  const config = await loadConfigFromS3()
-  await TensorFlowInit(config)
-  loadRules(config.rules)
-}
+import store from '../store'
+import axios from 'axios'
 
 onMounted(async () => {
-  init()
+  store.data = (await axios.get('./Home.json')).data
+  store.info = (await axios.get('./Info.json')).data
 
+  try {
+    const model = await tf.loadLayersModel(
+      'https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY_JSON/20250411/model.json'
+    )
+    globalThis.myTfModel = model
+    console.log('模型已預載完成')
+  } catch (error) {
+    console.error('模型載入失敗', error)
+  }
   // const images = import.meta.glob('@/assets/**/*.{png,svg}', { eager: false })
   // const preloadImages = async () => {
   //   const loadPromises = Object.values(images).map(loadImage =>
   //     loadImage().then(module => {
   //       const img = new Image()
   //       img.src = module.default
-
   //       return new Promise(resolve => (img.onload = resolve))
   //     })
   //   )
@@ -51,14 +33,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <RouterView />
+  <div class="section0">
+    <RouterView />
+  </div>
 </template>
 
 <style>
 html,
 body {
-  touch-action: none;
-
+  /* touch-action: none; */
   font-family: 'Noto Serif TC', serif;
   font-optical-sizing: auto; /* 保持光學尺寸調整 */
   font-weight: 400; /* 設定一個預設字重，例如 Regular 400 */

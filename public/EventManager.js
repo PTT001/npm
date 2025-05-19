@@ -90,11 +90,25 @@ const ActionExecuter = {
       window.open(url, '_blank') // 新開一個分頁
     } else {
     }
+  },
+  GoToInfo: async (params, ruleName, context) => {
+    try {
+      //清空buffer
+      predictionBuffer = []
+      window.location.hash = '/Info'
+      // const { default: router } = await import('@/router') // 動態導入 router
+      // router.replace(`/Info`)
+
+      // const { url } = params;
+      // router.replace(url);
+    } catch (error) {
+      console.error('Failed to load router:', error)
+    }
   }
 }
 
 const EventManager = {
-  invoke: event => {
+  invoke: async event => {
     for (const rule of rules) {
       if (
         !rule.enabled ||

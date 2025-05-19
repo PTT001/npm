@@ -1,0 +1,71 @@
+{
+  "banners": [
+    {
+      "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/banner.png"
+    },
+    {
+      "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/banner2.png"
+    },
+    {
+      "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/banner.png"
+    },
+    {
+      "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/banner2.png"
+    },
+    {
+      "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/banner.png"
+    }
+  ],
+  "hotItems": [
+    {
+      "id": 1,
+      "name": "霽青描金游魚轉心瓶",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/hotItem.png"
+    },
+    {
+      "id": 2,
+      "name": "太平有象瓷尊",
+      "location": "1F｜陳列室 106",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/hotItem2.png"
+    },
+    {
+      "id": 1,
+      "name": "霽青描金游魚轉心瓶",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/hotItem.png"
+    },
+    {
+      "id": 2,
+      "name": "太平有象瓷尊",
+      "location": "1F｜陳列室 106",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/hotItem2.png"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "白瓷嬰兒枕",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/otherItem.png"
+    },
+    {
+      "id": 2,
+      "name": "珊瑚魁星點斗盆景",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/otherItem1.png"
+    },
+    {
+      "id": 1,
+      "name": "白瓷嬰兒枕",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/otherItem.png"
+    },
+    {
+      "id": 2,
+      "name": "珊瑚魁星點斗盆景",
+      "location": "2F｜陳列室 205",
+      "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/otherItem1.png"
+    }
+  ]
+}
