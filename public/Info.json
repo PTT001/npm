@@ -31,7 +31,7 @@
       "title": "YouTube video player"
     },
     "ar": {
-      "url": "https://coreinteraction.arplanets.com/prod/index.html#/modelViewer/15817",
+      "url": "https://coreinteraction.arplanets.com/prod/index.html#/modelviewer/16969",
       "title": "AR Experience"
     },
     "music": {
@@ -65,44 +65,62 @@
   {
     "id": "2",
     "title": "太平有象瓷尊",
-    "banner": ["https://example.com/images/exhibit2-banner1.jpg"],
+    "banner": [
+      {
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+      },
+      {
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+      },
+      {
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+      },
+      {
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+      },
+      {
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+      }
+    ],
     "details": {
-      "era": "明 萬曆 西元 1573-1620",
+      "era": "清 十八世紀 西元1701-1800",
       "dimensions": "高 30 cm，口徑 10 cm",
       "location": "205陳列室"
     },
     "introduction": "象駝寶瓶瓷塑。大象四足直立，側首回視，雙眼微睜，鼻子上卷，兩側突出長牙，雙耳下垂，尾巴前拍。背部披掛一元寶形鞍，頂置出戟瓷尊，下垂厚長錦緞，彩繪如意、吉罄、蝙蝠、波濤和纓絡、連珠紋等。象身施灰棕色釉，局部加飾深色毫毛。四足底端無釉露胎。出戟瓷尊以湖綠釉為地，彩繪紅綠番蓮紋，邊戟塗金。整件作品無款，但器形與紋飾透露出產製於乾隆朝的可能性。鞍錦紋樣有壽山福海、吉慶有餘的象徵，大象和寶瓶共組「太平有象」，係屬官樣造型。除了瓷胎之外，亦有銅胎掐絲琺瑯製品，均成對陳設。",
-    "interactions": [
-      {
-        "type": "ar",
-        "icon": "https://example.com/assets/Interaction1.png"
-      },
-      {
-        "type": "video",
-        "icon": "https://example.com/assets/Interaction3.png"
-      }
-    ],
+
     "video": {
-      "url": "https://www.youtube.com/embed/another-video",
+      "url": "https://www.youtube.com/embed/aCyTcVCvCLY",
       "title": "Another Exhibit Video"
     },
     "ar": {
-      "url": "https://coreinteraction.arplanets.com/prod/index.html#/modelViewer/15818",
+      "url": "https://coreinteraction.arplanets.com/prod/index.html#/video/16970",
       "title": "AR Experience"
     },
     "music": {
       "url": "https://example.com/audio/exhibit2-audio.mp3"
     },
-    "icons": {
-      "back": "https://example.com/assets/Back.png",
-      "backScrolled": "https://example.com/assets/Back2.png"
-    },
-    "otherHotItems": [
+
+    "others": [
       {
-        "title": "展品 C",
-        "image": "https://example.com/images/item-c.jpg",
-        "description": "展品 C 的簡短描述。",
-        "id": "item-c"
+        "name": "太平有象瓷尊",
+        "location": "1F｜陳列室 105",
+        "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant.png"
+      },
+      {
+        "name": "翠玉白菜",
+        "location": "2F｜陳列室 205",
+        "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/cabbage.png"
+      },
+      {
+        "name": "太平有象瓷尊",
+        "location": "1F｜陳列室 105",
+        "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant.png"
+      },
+      {
+        "name": "翠玉白菜",
+        "location": "2F｜陳列室 205",
+        "imageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/cabbage.png"
       }
     ]
   }

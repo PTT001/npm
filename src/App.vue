@@ -1,21 +1,21 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'
-import store from '../store'
-import axios from 'axios'
+import { RouterView } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import store from '../store';
+import axios from 'axios';
 
 onMounted(async () => {
-  store.data = (await axios.get('./Home.json')).data
-  store.info = (await axios.get('./Info.json')).data
+  store.data = (await axios.get('./Home.json')).data;
+  store.info = (await axios.get('./Info.json')).data;
 
   try {
     const model = await tf.loadLayersModel(
       'https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY_JSON/20250411/model.json'
-    )
-    globalThis.myTfModel = model
-    console.log('模型已預載完成')
+    );
+    globalThis.myTfModel = model;
+    console.log('模型已預載完成');
   } catch (error) {
-    console.error('模型載入失敗', error)
+    console.error('模型載入失敗', error);
   }
   // const images = import.meta.glob('@/assets/**/*.{png,svg}', { eager: false })
   // const preloadImages = async () => {
@@ -29,7 +29,7 @@ onMounted(async () => {
   //   await Promise.all(loadPromises)
   //   console.log('所有圖片預載完成')
   // }
-})
+});
 </script>
 
 <template>
