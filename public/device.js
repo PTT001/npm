@@ -12,25 +12,13 @@ async function OpenCamera(
   videoElementID = 'webcam-video',
   isFrontCamera = false
 ) {
-  Log('OpenCamera')
   const videoElement = document.getElementById(videoElementID)
+
   if (!videoElement) {
     Log('Video element not found', 'red')
     return
   }
 
-  // 設置影片元素屬性
-  videoElement.setAttribute('autoplay', 'true')
-  videoElement.setAttribute('muted', 'true')
-  videoElement.setAttribute('playsinline', 'true')
-
-  // 設置全螢幕樣式
-  videoElement.style.width = '100vw'
-  videoElement.style.height = '100vh'
-  videoElement.style.objectFit = 'cover'
-  videoElement.style.position = 'absolute'
-  videoElement.style.top = '0'
-  videoElement.style.left = '0'
   videoElement.style.display = 'none' // 延遲顯示直到串流穩定
 
   // 設置攝影機選項

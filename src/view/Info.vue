@@ -5,7 +5,7 @@
       class="fixed top-0 left-0 right-0 z-30 p-4 flex items-center transition-all duration-300"
       :class="{
         'bg-custom-bg shadow-md': isScrolled,
-        'bg-transparent': !isScrolled,
+        'bg-transparent': !isScrolled
       }"
     >
       <button
@@ -41,7 +41,9 @@
         <div
           class="absolute -top-5 left-1/2 -translate-x-1/2 bg-title-bg rounded-full"
         >
-          <h2 class="text-lg font-semibold text-title py-[6px] px-[11px]">
+          <h2
+            class="text-lg font-semibold text-title py-[6px] px-[11px] whitespace-nowrap overflow-hidden text-ellipsis"
+          >
             {{ item.title }}
           </h2>
         </div>
@@ -170,94 +172,94 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import Back from '../assets/Back.png';
-import Back2 from '../assets/Back2.png';
-import DetailSlider from '../components/DetailSlider.vue';
-import OtherHotItem from '../components/OtherHotItemSlider.vue';
-import 'vue3-audio-player/dist/style.css';
-import MusicPlayer from '../components/MusicPlayer.vue';
-import { useRoute } from 'vue-router';
-import store from '../../store';
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import Back from '../assets/Back.png'
+import Back2 from '../assets/Back2.png'
+import DetailSlider from '../components/DetailSlider.vue'
+import OtherHotItem from '../components/OtherHotItemSlider.vue'
+import 'vue3-audio-player/dist/style.css'
+import MusicPlayer from '../components/MusicPlayer.vue'
+import { useRoute } from 'vue-router'
+import store from '../../store'
 
-const route = useRoute();
-const id = ref(route.params.id);
-const item = computed(() => store.info.find((item) => item.id === id.value));
+const route = useRoute()
+const id = ref(route.params.id)
+const item = computed(() => store.info.find(item => item.id === id.value))
 
 // Refs for elements
-const headerRef = ref(null);
-const detailSliderRef = ref(null);
-const videoSection = ref(null);
+const headerRef = ref(null)
+const detailSliderRef = ref(null)
+const videoSection = ref(null)
 
-const headerHeight = ref(0);
-let observer = null;
+const headerHeight = ref(0)
+let observer = null
 
 // Reactive state for header visibility
-const isScrolled = ref(false);
+const isScrolled = ref(false)
 
 // Router instance for navigation
-const router = useRouter();
+const router = useRouter()
 
 const scrollToVideo = () => {
-  videoSection.value?.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Added block: 'center' for better positioning
-};
+  videoSection.value?.scrollIntoView({ behavior: 'smooth', block: 'center' }) // Added block: 'center' for better positioning
+}
 
-const showAR = ref(false);
+const showAR = ref(false)
 const openAR = () => {
-  showAR.value = true;
-};
+  showAR.value = true
+}
 const closeAR = () => {
-  showAR.value = false;
-};
+  showAR.value = false
+}
 
 // Go back to previous route
 const goBack = () => {
-  router.push(`/InfoList`);
-};
+  router.push(`/InfoList`)
+}
 
-const musicPlayer = ref(null); // Ref to access MusicPlayer component
+const musicPlayer = ref(null) // Ref to access MusicPlayer component
 
 // Method to open the music player
 const openMusicPlayer = () => {
   if (musicPlayer.value) {
-    musicPlayer.value.openPlayer();
+    musicPlayer.value.openPlayer()
   }
-};
+}
 
 onMounted(() => {
   // Get header height after it's rendered
   if (headerRef.value) {
-    headerHeight.value = headerRef.value.offsetHeight;
+    headerHeight.value = headerRef.value.offsetHeight
   }
 
   // Ensure DetailSlider component's root element ($el) is available and is an Element
   if (detailSliderRef.value && detailSliderRef.value.$el instanceof Element) {
-    const targetElement = detailSliderRef.value.$el;
+    const targetElement = detailSliderRef.value.$el
 
     observer = new IntersectionObserver(
       ([entry]) => {
-        isScrolled.value = !entry.isIntersecting;
+        isScrolled.value = !entry.isIntersecting
       },
       {
         root: null, // observing intersections with the viewport
         rootMargin: `-${headerHeight.value}px 0px 0px 0px`,
-        threshold: 0, // Trigger as soon as any part crosses the boundary
+        threshold: 0 // Trigger as soon as any part crosses the boundary
       }
-    );
-    observer.observe(targetElement);
+    )
+    observer.observe(targetElement)
   } else if (detailSliderRef.value) {
     console.warn(
       'DetailSlider ref is present, but $el is not an Element or is not available yet. IntersectionObserver not started for DetailSlider.'
-    );
+    )
   }
-});
+})
 
 onUnmounted(() => {
   if (observer) {
-    observer.disconnect();
+    observer.disconnect()
   }
-});
+})
 </script>
 
 <style scoped>
@@ -268,5 +270,11 @@ onUnmounted(() => {
   font-style: normal;
   -webkit-font-smoothing: antialiased; /* 改善字體渲染 (macOS/iOS) */
   -moz-osx-font-smoothing: grayscale; /* 改善字體渲染 (Firefox on macOS) */
+}
+
+.text-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

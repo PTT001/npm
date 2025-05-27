@@ -67,19 +67,19 @@
     "title": "太平有象瓷尊",
     "banner": [
       {
-        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant2.png"
       },
       {
-        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant2.png"
       },
       {
-        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant2.png"
       },
       {
-        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant2.png"
       },
       {
-        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/dragon.png"
+        "ImageUrl": "https://arplanets.s3.ap-southeast-1.amazonaws.com/frontend-test/CY/img/elephant2.png"
       }
     ],
     "details": {
@@ -94,7 +94,7 @@
       "title": "Another Exhibit Video"
     },
     "ar": {
-      "url": "https://coreinteraction.arplanets.com/prod/index.html#/video/16970",
+      "url": "https://coreinteraction.arplanets.com/prod/index.html#/modelviewer/16971",
       "title": "AR Experience"
     },
     "music": {
